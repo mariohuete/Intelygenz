@@ -18,7 +18,6 @@ import com.mariohuete.rss_reader.models.Model;
 import com.mariohuete.rss_reader.utils.Api;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -108,16 +107,43 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void updateList(final List<Model> listOnline) {
+        // Sort the items alphabetically cause I have no date
+        //Collections.sort(listOnline, Model.ByNameComparator);
         // Set adapter for listView
         adapter = new ModelAdapter(listOnline, this);
         lv.setAdapter(adapter);
         // React to user clicks on item
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
-
+                // Save data to retrieve it when there's no internet connection
+                //saveData(listOnline.get(position));
+                // Start new activity with details
+                /*intent = new Intent(getApplicationContext(), DetailActivity.class);
+                intent.putExtra("mName", listOnline.get(position).getName());
+                intent.putExtra("mDesc", listOnline.get(position).getInstructions());
+                intent.putExtra("mPhot", listOnline.get(position).getPhoto());
+                startActivity(intent);*/
             }
         });
         // TextFilter for search by title
         lv.setTextFilterEnabled(true);
+
+        // Listener for text searching
+        editTxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (count < before) {
+                    // We're deleting char so we need to reset the adapter data
+                    adapter.resetData();
+                }
+                adapter.getFilter().filter(s.toString());
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+        });
     }
 }

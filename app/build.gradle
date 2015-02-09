@@ -27,4 +27,6 @@ dependencies {
     // Use retrofit cause it's faster than asyncTask and Volley
     compile 'com.squareup.retrofit:retrofit:1.6.1'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
+    // Use ion to lazy load images in listView
+    compile 'com.koushikdutta.ion:ion:2.0.5'
 }

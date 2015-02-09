@@ -6,9 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.koushikdutta.ion.Ion;
+import com.mariohuete.rss_reader.MainActivity;
 import com.mariohuete.rss_reader.R;
 import com.mariohuete.rss_reader.models.Model;
 
@@ -19,12 +22,13 @@ import java.util.List;
 /**
  * Created by mariobama on 09/02/15.
  */
-public class ModelAdapter extends ArrayAdapter<Model> {
+public class ModelAdapter extends ArrayAdapter<Model> implements Filterable {
 
     private List<Model> modelList;
     private Context context;
     private Filter modelFilter;
     private List<Model> origModelList;
+    private String URL_PHOTO = MainActivity.END_POINT+"/photos/";
 
     public ModelAdapter(List<Model> list, Context ctx) {
         super(ctx, R.layout.img_row_layout, list);
@@ -65,12 +69,21 @@ public class ModelAdapter extends ArrayAdapter<Model> {
             holder.image = img;
 
             v.setTag(holder);
-        } else
+        }
+        else
             holder = (ModelHolder) v.getTag();
 
         Model p = modelList.get(position);
         holder.modelNameView.setText(p.getName());
         holder.distView.setText("" + p.getInstructions());
+        Ion.with(context)
+                .load(URL_PHOTO + p.getPhoto())
+                .withBitmap()
+                /*.placeholder(R.drawable.placeholder_image)*/
+                .error(R.mipmap.ic_launcher)
+                /*.animateLoad(spinAnimation)
+                .animateIn(fadeInAnimation)*/
+                .intoImageView(holder.image);
 
         return v;
     }
@@ -92,6 +105,7 @@ public class ModelAdapter extends ArrayAdapter<Model> {
 	/*
 	 * We create our filter
 	 */
+
     @Override
     public Filter getFilter() {
         if (modelFilter == null)
@@ -110,7 +124,8 @@ public class ModelAdapter extends ArrayAdapter<Model> {
                 // No filter implemented we return all the list
                 results.values = origModelList;
                 results.count = origModelList.size();
-            } else {
+            }
+            else {
                 // We perform filtering operation
                 List<Model> nModelList = new ArrayList<Model>();
 
