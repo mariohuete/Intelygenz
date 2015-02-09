@@ -1,29 +1,70 @@
 package com.mariohuete.rss_reader;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.mariohuete.rss_reader.adapters.ModelAdapter;
+import com.mariohuete.rss_reader.models.Model;
+import com.mariohuete.rss_reader.utils.Api;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 /**
  * Created by mariobama on 09/02/15.
  */
 public class MainActivity extends ActionBarActivity {
+    //ATTRIBUTES:
+    private List<Model> modelList = new ArrayList<Model>();
+    private ModelAdapter adapter;
+    public static final String END_POINT = "http://services.hanselandpetal.com";
+    private ProgressDialog pd;
+    private Intent intent;
     @InjectView(R.id.listView) protected ListView lv;
     @InjectView(R.id.editTxt) protected EditText editTxt;
 
 
+    //METHODS:
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        pd = new ProgressDialog(this);
+        pd.setMessage(getResources().getString(R.string.loading));
+        pd.setCancelable(false);
+        pd.show();
         ButterKnife.inject(this);
+        initList();
+    }
+
+    private void initList() {
+        // If there's internet connection, get info from json
+        // if not, try to get data stored in sd card
+        //if(Connec.isOnline(this))
+            requestData();
+        /*else {
+            pd.dismiss();
+            restoreData();
+        }*/
     }
 
 
@@ -47,5 +88,36 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void requestData() {
+        // Use retrofit to get json data
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(END_POINT).build();
+        Api api = restAdapter.create(Api.class);
+        api.getList(new Callback<List<Model>>() {
+            @Override
+            public void success(List<Model> models, Response response) {
+                modelList = models;
+                updateList(modelList);
+                pd.dismiss();
+            }
+            @Override
+            public void failure(RetrofitError error) {
+            }
+        });
+    }
+
+    public void updateList(final List<Model> listOnline) {
+        // Set adapter for listView
+        adapter = new ModelAdapter(listOnline, this);
+        lv.setAdapter(adapter);
+        // React to user clicks on item
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
+
+            }
+        });
+        // TextFilter for search by title
+        lv.setTextFilterEnabled(true);
     }
 }
