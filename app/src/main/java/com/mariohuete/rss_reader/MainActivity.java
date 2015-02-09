@@ -131,7 +131,7 @@ public class MainActivity extends ActionBarActivity {
                 intent.putExtra("mName", listOnline.get(position).getName());
                 intent.putExtra("mDesc", listOnline.get(position).getInstructions());
                 intent.putExtra("mPhot", listOnline.get(position).getPhoto());
-                //startActivity(intent);
+                startActivity(intent);
             }
         });
         // TextFilter for search by title
