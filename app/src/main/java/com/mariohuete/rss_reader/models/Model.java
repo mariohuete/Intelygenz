@@ -1,10 +1,14 @@
 package com.mariohuete.rss_reader.models;
 
 
+import java.io.Serializable;
+import java.util.Comparator;
+
 /**
  * Created by mariobama on 09/02/15.
  */
-public class Model {
+public class Model implements Serializable, Comparable {
+
     //ATTRIBUTES:
     private String name;
     private String instructions;
@@ -16,6 +20,16 @@ public class Model {
         this.instructions = instr;
         this.photo = photo;
     }
+
+    // Comparator to filter text when set the items in listView
+    public static Comparator<Model> ByNameComparator = new Comparator<Model>() {
+        @Override
+        public int compare(Model lhs, Model rhs) {
+            String modelName1 = lhs.getName().toUpperCase();
+            String modelName2 = rhs.getName().toUpperCase();
+            return modelName1.compareTo(modelName2);
+        }
+    };
 
     // Get and set methods
     public String getName() {
@@ -35,6 +49,11 @@ public class Model {
     }
     public void setPhoto(String pht) {
         this.photo = pht;
+    }
+
+    @Override
+    public int compareTo(Object another) {
+        return 0;
     }
 
 }
