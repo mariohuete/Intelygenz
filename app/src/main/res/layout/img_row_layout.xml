@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/img"
         android:layout_toRightOf="@+id/img"
+        android:layout_marginRight="3dip"
         android:textStyle="bold" />
 
     <TextView
@@ -26,6 +27,7 @@
         android:layout_below="@id/name"
         android:layout_gravity="center"
         android:layout_marginTop="2dip"
+        android:layout_marginRight="5dip"
         android:layout_toRightOf="@id/img"
         android:gravity="right"
         android:textSize="8dp"

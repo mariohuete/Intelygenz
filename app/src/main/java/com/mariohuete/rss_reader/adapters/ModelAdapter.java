@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.koushikdutta.ion.Ion;
-import com.mariohuete.rss_reader.MainActivity;
 import com.mariohuete.rss_reader.R;
 import com.mariohuete.rss_reader.models.Model;
 
@@ -130,7 +129,7 @@ public class ModelAdapter extends ArrayAdapter<Model> implements Filterable {
             }
             else {
                 // We perform filtering operation
-                List<Model> nModelList = new ArrayList<Model>();
+                List<Model> nModelList = new ArrayList<>();
 
                 for (Model p : modelList) {
                     if (p.getName().toUpperCase().startsWith(constraint.toString().toUpperCase()))

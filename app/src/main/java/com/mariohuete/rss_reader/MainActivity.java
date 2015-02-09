@@ -36,7 +36,7 @@ import retrofit.client.Response;
 public class MainActivity extends ActionBarActivity {
 
     //ATTRIBUTES:
-    private List<Model> modelList = new ArrayList<Model>();
+    private List<Model> modelList = new ArrayList<>();
     private ModelAdapter adapter;
     private ProgressDialog pd;
     private Intent intent;
@@ -64,6 +64,7 @@ public class MainActivity extends ActionBarActivity {
             requestData();
         else {
             pd.dismiss();
+            Connect.showToast(this);
             //XXXrestoreData();
         }
     }
@@ -118,13 +119,13 @@ public class MainActivity extends ActionBarActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
                 // Save data to retrieve it when there's no internet connection
-                /*XXXsaveData(listOnline.get(position));
+                //XXXsaveData(listOnline.get(position));
                 // Start new activity with details
                 intent = new Intent(getApplicationContext(), DetailActivity.class);
                 intent.putExtra("mName", listOnline.get(position).getName());
                 intent.putExtra("mDesc", listOnline.get(position).getInstructions());
                 intent.putExtra("mPhot", listOnline.get(position).getPhoto());
-                startActivity(intent);*/
+                //startActivity(intent);
             }
         });
         // TextFilter for search by title

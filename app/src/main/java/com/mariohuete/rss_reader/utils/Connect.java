@@ -13,24 +13,18 @@ import com.mariohuete.rss_reader.R;
  */
 public class Connect {
 
-    //ATTRIBUTES:
-    private static ConnectivityManager cm;
-    private static NetworkInfo netInfo;
-
     //METHODS:
     public static boolean isOnline(Context context) {
         // Check if there's an available connection
-        cm = (ConnectivityManager) context
+        ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
-        netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            return true;
-        }
-        return false;
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     public static void showToast(Context context) {
         // Show toast when try to access web browser but ther'es no internet connection
         Toast.makeText(context, context.getResources().getString(R.string.no_conn), Toast.LENGTH_LONG).show();
     }
+
 }
