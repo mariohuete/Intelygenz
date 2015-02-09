@@ -4,4 +4,6 @@
     <string name="search">Buscar…</string>
     <string name="loading">Cargando…</string>
     <string name="no_conn">No hay conexión a internet</string>
+    <string name="end_point">http://services.hanselandpetal.com</string>
+    <string name="photos">/photos/</string>
 </resources>

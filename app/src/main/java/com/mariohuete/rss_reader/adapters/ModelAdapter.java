@@ -24,17 +24,20 @@ import java.util.List;
  */
 public class ModelAdapter extends ArrayAdapter<Model> implements Filterable {
 
+    //ATTRIBUTES:
     private List<Model> modelList;
     private Context context;
     private Filter modelFilter;
     private List<Model> origModelList;
-    private String URL_PHOTO = MainActivity.END_POINT+"/photos/";
+    private String URL_PHOTO;
 
+    //METHODS:
     public ModelAdapter(List<Model> list, Context ctx) {
         super(ctx, R.layout.img_row_layout, list);
         this.modelList = list;
         this.context = ctx;
         this.origModelList = list;
+        URL_PHOTO = ctx.getString(R.string.end_point)+ctx.getString(R.string.photos);
     }
 
     public int getCount() {
