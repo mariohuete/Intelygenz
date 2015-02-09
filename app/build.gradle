@@ -24,4 +24,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     // Use butterKnife to annotate the inflation of views
     compile 'com.jakewharton:butterknife:5.1.2'
+    // Use retrofit cause it's faster than asyncTask and Volley
+    compile 'com.squareup.retrofit:retrofit:1.6.1'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
 }
