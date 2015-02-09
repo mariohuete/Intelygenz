@@ -196,13 +196,13 @@ public class MainActivity extends ActionBarActivity {
     public ArrayList<Model> restoreModel(File f) {
         // Retrieve all items stored in sd card
         File list[] = f.listFiles();
-        ArrayList<Model> restoredList = new ArrayList<>();
+        ArrayList<Model> restoredList = new ArrayList<Model>();
         ObjectInputStream ois;
         Model o;
         try {
-            for (File aList : list) {
-                ois = new ObjectInputStream(new FileInputStream(aList));
-                o = (Model) ois.readObject();
+            for(int i = 0; i<list.length; i++) {
+                ois = new ObjectInputStream(new FileInputStream(list[i]));
+                o = (Model)ois.readObject();
                 restoredList.add(o);
             }
         }
@@ -211,4 +211,5 @@ public class MainActivity extends ActionBarActivity {
         }
         return restoredList;
     }
+
 }

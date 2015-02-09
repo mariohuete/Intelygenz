@@ -19,6 +19,7 @@ public class StoreData {
     public static void createFolder() {
         // Create new folder in SdCard if doesn't exist
         File f = new File(FOLDER_DIR);
+        f.mkdirs();
     }
 
 }
