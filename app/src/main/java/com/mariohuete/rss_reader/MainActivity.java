@@ -11,6 +11,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
+/**
+ * Created by mariobama on 09/02/15.
+ */
 public class MainActivity extends ActionBarActivity {
     @InjectView(R.id.listView) protected ListView lv;
     @InjectView(R.id.editTxt) protected EditText editTxt;
