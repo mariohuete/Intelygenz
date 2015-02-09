@@ -17,7 +17,13 @@ import com.mariohuete.rss_reader.adapters.ModelAdapter;
 import com.mariohuete.rss_reader.models.Model;
 import com.mariohuete.rss_reader.utils.Api;
 import com.mariohuete.rss_reader.utils.Connect;
+import com.mariohuete.rss_reader.utils.StoreData;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +71,7 @@ public class MainActivity extends ActionBarActivity {
         else {
             pd.dismiss();
             Connect.showToast(this);
-            //XXXrestoreData();
+            restoreData();
         }
     }
 
@@ -119,7 +125,7 @@ public class MainActivity extends ActionBarActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
                 // Save data to retrieve it when there's no internet connection
-                //XXXsaveData(listOnline.get(position));
+                saveData(listOnline.get(position));
                 // Start new activity with details
                 intent = new Intent(getApplicationContext(), DetailActivity.class);
                 intent.putExtra("mName", listOnline.get(position).getName());
@@ -150,7 +156,7 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-    /*XXXpublic void saveData(Model mdl) {
+    public void saveData(Model mdl) {
         // If folder doesn't exist -> create
         if(!StoreData.folderExists()) {
             StoreData.createFolder();
@@ -190,13 +196,13 @@ public class MainActivity extends ActionBarActivity {
     public ArrayList<Model> restoreModel(File f) {
         // Retrieve all items stored in sd card
         File list[] = f.listFiles();
-        ArrayList<Model> restoredList = new ArrayList<Model>();
+        ArrayList<Model> restoredList = new ArrayList<>();
         ObjectInputStream ois;
         Model o;
         try {
-            for(int i = 0; i<list.length; i++) {
-                ois = new ObjectInputStream(new FileInputStream(list[i]));
-                o = (Model)ois.readObject();
+            for (File aList : list) {
+                ois = new ObjectInputStream(new FileInputStream(aList));
+                o = (Model) ois.readObject();
                 restoredList.add(o);
             }
         }
@@ -204,5 +210,5 @@ public class MainActivity extends ActionBarActivity {
             ex.printStackTrace();
         }
         return restoredList;
-    }*/
+    }
 }
