@@ -5,8 +5,8 @@
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_gravity="left"
         android:paddingLeft="0dip"
         android:src="@mipmap/ic_launcher" />
@@ -17,8 +17,9 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/img"
         android:layout_toRightOf="@+id/img"
-        android:layout_marginRight="3dip"
-        android:layout_marginLeft="3dip"
+        android:layout_marginRight="5dip"
+        android:layout_marginLeft="5dip"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
@@ -28,13 +29,13 @@
         android:layout_below="@id/name"
         android:layout_gravity="center"
         android:layout_marginTop="2dip"
-        android:layout_marginRight="5dip"
-        android:layout_marginLeft="5dip"
+        android:layout_marginRight="7dip"
+        android:layout_marginLeft="7dip"
         android:layout_toRightOf="@id/img"
         android:maxLines="1"
         android:ellipsize="end"
         android:gravity="right"
-        android:textSize="8dp"
+        android:textSize="18sp"
         android:textStyle="italic" />
 
 </RelativeLayout>
