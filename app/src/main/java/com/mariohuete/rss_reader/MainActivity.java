@@ -12,10 +12,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mariohuete.rss_reader.adapters.ModelAdapter;
 import com.mariohuete.rss_reader.models.Model;
 import com.mariohuete.rss_reader.utils.Api;
+import com.mariohuete.rss_reader.utils.Common;
 import com.mariohuete.rss_reader.utils.Connect;
 import com.mariohuete.rss_reader.utils.StoreData;
 
@@ -92,6 +95,13 @@ public class MainActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if(id == R.id.action_refresh) {
+            pd = new ProgressDialog(this);
+            pd.setMessage(getResources().getString(R.string.loading));
+            pd.setCancelable(false);
+            pd.show();
+            initList();
         }
 
         return super.onOptionsItemSelected(item);
@@ -178,6 +188,9 @@ public class MainActivity extends ActionBarActivity {
         lv.setAdapter(adapter);
         updateList(modelList);
         pd.dismiss();
+        if(modelList.size() <= 0) {
+            Toast.makeText(this, getString(R.string.no_content),Toast.LENGTH_LONG).show();
+        }
     }
 
     public void saveModel(Model mdl) {
