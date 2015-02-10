@@ -36,7 +36,7 @@ public class ModelAdapter extends ArrayAdapter<Model> implements Filterable {
         this.modelList = list;
         this.context = ctx;
         this.origModelList = list;
-        URL_PHOTO = ctx.getString(R.string.end_point)+ctx.getString(R.string.photos);
+        URL_PHOTO = ctx.getString(R.string.end_point1)+ctx.getString(R.string.photos1);
     }
 
     public int getCount() {

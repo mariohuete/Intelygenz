@@ -100,7 +100,7 @@ public class MainActivity extends ActionBarActivity {
     public void requestData() {
         // Use retrofit to get json data
         RestAdapter restAdapter = new RestAdapter.Builder().
-                setEndpoint(getString(R.string.end_point)).build();
+                setEndpoint(getString(R.string.end_point1)).build();
         Api api = restAdapter.create(Api.class);
         api.getList(new Callback<List<Model>>() {
             @Override

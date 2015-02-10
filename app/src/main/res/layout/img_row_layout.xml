@@ -29,6 +29,8 @@
         android:layout_marginTop="2dip"
         android:layout_marginRight="5dip"
         android:layout_toRightOf="@id/img"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:gravity="right"
         android:textSize="8dp"
         android:textStyle="italic" />
