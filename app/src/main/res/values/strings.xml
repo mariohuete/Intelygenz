@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">RSS_Reader</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Feed</string>
+    <string name="action_refresh">Actualizar</string>
     <string name="search">Buscar…</string>
     <string name="loading">Cargando…</string>
     <string name="no_conn">No hay conexión a internet. Recuperando contenido…</string>
     <string name="end_point1">http://services.hanselandpetal.com</string>
     <string name="photos1">/photos/</string>
     <string name="browser">Ver en el navegador</string>
-    <string name="reloading">Recuperando contenido…</string>
+    <string name="reloading">Recuperando contenido cacheado…</string>
+    <string name="no_content">No hay contenido cacheado…</string>
+    <string name="end_point2">http://www.rtve.es/api/noticias.json?size=10</string>
 </resources>

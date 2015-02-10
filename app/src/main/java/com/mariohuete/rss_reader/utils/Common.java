@@ -6,4 +6,5 @@ package com.mariohuete.rss_reader.utils;
  */
 public class Common {
     public static boolean connected;
+    public static boolean feed = false;
 }

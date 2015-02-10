@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mariohuete.rss_reader.adapters.ModelAdapter;
@@ -94,6 +93,10 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            if(Common.feed)
+                Common.feed = false;
+            else
+                Common.feed = true;
             return true;
         }
         if(id == R.id.action_refresh) {
@@ -119,6 +122,7 @@ public class MainActivity extends ActionBarActivity {
                 updateList(modelList);
                 pd.dismiss();
             }
+
             @Override
             public void failure(RetrofitError error) {
             }
